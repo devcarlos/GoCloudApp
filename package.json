@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "gocloud",
+  "version": "1.0.0",
+  "description": "GoCloud Cpech App",
+  "engines": {
+    "node": ">10"
+  },
+  "scripts": {
+    "preinstall": "cd client && npm i",
+    "postinstall": "cd server && npm i",
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "start": "concurrently --kill-others-on-fail \"npm run server\"  \"npm run client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run server:dev\"  \"npm run client\""
+  },
+  "dependencies": {
+    "concurrently": "5.1.0"
+  }
+}
