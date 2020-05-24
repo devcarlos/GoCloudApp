@@ -24,4 +24,20 @@ router.post(
   SubscriptionController.register
 );
 
+/* GET landing/subscriptions */
+router.get(
+  '/subscriptions',
+  SubscriptionController.list
+);
+
+/* GET landing/subscriptions/:id */
+router.route('/subscriptions/:id')
+.get(
+  SubscriptionController.listById
+)
+
+.delete(
+  SubscriptionController.deleteById
+);
+
 module.exports = router;
