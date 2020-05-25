@@ -1,102 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-class Welcome extends React.Component {
-  render() {
-    return <h1>Hello World By {this.props.name}... !!!</h1>;
-  }
-}
-
-function Avatar(props) {
-  return (
-    <img className="Avatar-image"
-      src={props.image}
-      alt={props.user.name}
-    />
-  );
-}
-
-function UserInfo(props) {
-  return (
-    <div className="UserInfo">
-      <Avatar user={props.user} image={props.image} />
-      <div className="UserInfo-name">
-        {props.user.name}
-      </div>
-    </div>
-  );
-}
-
-function Comment(props) {
-  return (
-    <div className="Comment">
-      <UserInfo user={props.author} image={props.avatarUrl} />
-      <div className="Comment-text">
-        {props.text}
-      </div>
-      <div className="Comment-date">
-        {formatDate(props.date)}
-      </div>
-    </div>
-  );
-}
-
-function formatDate(date) {
-  return (
-    <h3>{date}</h3>
-  )
-}
-
-// function App() {
-//   return (
-// <div className="App">
-//   <div id="ticker"></div>
-//   <header className="App-header">
-//     <img src={logo} className="App-logo" alt="logo" />
-//     <div>
-//     <Welcome name="Charles" />
-//     </div>
-//     <div>
-//     <Comment author="name=Charles" avatarUrl="https://pbs.twimg.com/profile_images/1083503310332706816/aWsvkmRi_400x400.jpg" date="2020-05-23" text="This is a long comment text" />
-//     </div>
-//   </header>
-//   <h1 className="App-intro">Testing</h1>
-// </div>
-//   );
-// }
+import Landing from "./components/landing";
+import Subscription from "./components/subscription";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
-
-  callAPI() {
-    fetch("http://localhost:9000/test")
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }))
-      .catch(err => err);
-  }
-
-  componentDidMount() {
-    this.callAPI();
-  }
-
   render() {
-    return (
+    return (<Router>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div>
-            <Welcome name="Charles" />
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+          <div className="container">
+            <img className="navbar-brand cpech-image" src="/logo.png" alt="logo" />
+            <Link className="navbar-brand" to={"/landing"}>Inicio</Link>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/landing"}>Inicio</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/subscription"}>Subscripciones</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <Comment author="name=Charles" avatarUrl="https://pbs.twimg.com/profile_images/1083503310332706816/aWsvkmRi_400x400.jpg" date="2020-05-23" text="This is a long comment text" />
+        </nav>
+        <div className="header-title">
+          <h1>Cursos de Verano +NEM</h1>
+          <h5>No dejes de pasar esta increíble oportunidad. Inscribite acá</h5>
+        </div>
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Switch>
+              <Route exact path='/' component={Landing} />
+              <Route path="/landing" component={Landing} />
+              <Route path="/subscription" component={Subscription} />
+            </Switch>
           </div>
-        </header>
-        <p className="App-intro">{this.state.apiResponse}</p>
-      </div>
+        </div>
+      </div></Router>
     );
   }
 }

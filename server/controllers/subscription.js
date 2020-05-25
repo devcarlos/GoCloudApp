@@ -73,7 +73,7 @@ const register = function (req, res, next) {
           400,
         );
       } else {
-        let message = `Success: POST subscriptioon registered: ${email}`;
+        let message = `Subscripcion registrada: ${email}`;
         console.log("Success", "200", message);
         return res.SuccessHandler(message);
       }
@@ -167,7 +167,7 @@ const deleteById = function (req, res, next) {
           400,
         );
       } else {
-          let message = `Success: DELETED Subscription`;
+          let message = `Subscripcion Eliminada`;
           console.log("Success", "200", message);
           return res.SuccessHandler(message);
       }
